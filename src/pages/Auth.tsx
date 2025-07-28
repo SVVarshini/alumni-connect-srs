@@ -74,7 +74,17 @@ const Auth = () => {
     } else {
       toast({
         title: "Registration Successful!",
-        description: "Please check your email to verify your account.",
+        description: "Please check your email and click the verification link to complete your registration.",
+      });
+      // Reset form
+      setSignupData({
+        email: '',
+        password: '',
+        first_name: '',
+        last_name: '',
+        graduation_year: '',
+        course: '',
+        phone: '',
       });
     }
     setLoading(false);
