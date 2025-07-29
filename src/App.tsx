@@ -9,6 +9,10 @@ import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import EmailVerification from "./pages/EmailVerification";
 import NotFound from "./pages/NotFound";
+import AppLayout from "./components/layout/AppLayout";
+import AlumniNetwork from "./pages/AlumniNetwork";
+import CareerPortal from "./pages/CareerPortal";
+import Events from "./pages/Events";
 
 const queryClient = new QueryClient();
 
@@ -39,13 +43,18 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/verify" element={<EmailVerification />} />
             <Route 
-              path="/dashboard" 
+              path="/" 
               element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  <AppLayout />
                 </ProtectedRoute>
-              } 
-            />
+              }
+            >
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="alumni-network" element={<AlumniNetwork />} />
+              <Route path="career-portal" element={<CareerPortal />} />
+              <Route path="events" element={<Events />} />
+            </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
