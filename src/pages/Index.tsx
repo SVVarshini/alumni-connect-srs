@@ -31,9 +31,9 @@ const floatingElements = [
   { icon: Users, title: "Alumni Network", path: "/alumni-network", description: "Connect with alumni worldwide" },
   { icon: Briefcase, title: "Career Portal", path: "/career-portal", description: "Discover job opportunities" },
   { icon: Calendar, title: "Events", path: "/events", description: "Join exciting alumni events" },
-  { icon: BookOpen, title: "Knowledge Hub", path: "/knowledge", description: "Share and learn together" },
-  { icon: Heart, title: "Give Back", path: "/give-back", description: "Support future generations" },
-  { icon: Star, title: "Success Stories", path: "/stories", description: "Celebrate achievements" }
+  { icon: BookOpen, title: "Knowledge Hub", path: "/alumni-network", description: "Share and learn together" },
+  { icon: Heart, title: "Give Back", path: "/alumni-network", description: "Support future generations" },
+  { icon: Star, title: "Success Stories", path: "/alumni-network", description: "Celebrate achievements" }
 ];
 
 const Index = () => {
