@@ -41,11 +41,12 @@ const Index = () => {
   const navigate = useNavigate();
   const [currentQuote, setCurrentQuote] = useState(0);
 
-  useEffect(() => {
-    if (!loading && user) {
-      navigate('/dashboard');
-    }
-  }, [user, loading, navigate]);
+  // Removed auto-redirect so you can view homepage when logged in
+  // useEffect(() => {
+  //   if (!loading && user) {
+  //     navigate('/dashboard');
+  //   }
+  // }, [user, loading, navigate]);
 
   useEffect(() => {
     const interval = setInterval(() => {
