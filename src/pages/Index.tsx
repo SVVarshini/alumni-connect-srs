@@ -1,15 +1,45 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
-import { GraduationCap, Users, Calendar, Briefcase, ArrowRight, Shield, Network, Trophy, Sparkles } from 'lucide-react';
-import { useEffect } from 'react';
+import { GraduationCap, Users, Calendar, Briefcase, ArrowRight, BookOpen, Heart, Quote, Star, Sparkles, Network, Shield, Trophy } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+const quotes = [
+  {
+    text: "The connections I made through our alumni network opened doors I never knew existed.",
+    author: "Sarah Chen",
+    class: "Class of 2018",
+    position: "Senior Software Engineer at Google"
+  },
+  {
+    text: "Mentoring current students has been one of the most rewarding experiences of my career.",
+    author: "Michael Rodriguez", 
+    class: "Class of 2015",
+    position: "VP of Marketing at Tesla"
+  },
+  {
+    text: "Our alumni community is like an extended family that spans the globe.",
+    author: "Dr. Aisha Patel",
+    class: "Class of 2012", 
+    position: "Chief Medical Officer"
+  }
+];
+
+const floatingElements = [
+  { icon: Users, title: "Alumni Network", path: "/alumni-network", description: "Connect with alumni worldwide" },
+  { icon: Briefcase, title: "Career Portal", path: "/career-portal", description: "Discover job opportunities" },
+  { icon: Calendar, title: "Events", path: "/events", description: "Join exciting alumni events" },
+  { icon: BookOpen, title: "Knowledge Hub", path: "/knowledge", description: "Share and learn together" },
+  { icon: Heart, title: "Give Back", path: "/give-back", description: "Support future generations" },
+  { icon: Star, title: "Success Stories", path: "/stories", description: "Celebrate achievements" }
+];
 
 const Index = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
+  const [currentQuote, setCurrentQuote] = useState(0);
 
   useEffect(() => {
     if (!loading && user) {
@@ -17,199 +47,184 @@ const Index = () => {
     }
   }, [user, loading, navigate]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentQuote((prev) => (prev + 1) % quotes.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-primary/10">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Animated Background Elements */}
+    <div className="min-h-screen bg-gradient-to-br from-background via-background/90 to-primary/10 relative overflow-hidden">
+      {/* Animated Background Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/3 to-accent/3 rounded-full blur-3xl animate-pulse delay-500"></div>
+        {[...Array(30)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 bg-primary/30 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 3}s`
+            }}
+          />
+        ))}
+        
+        {/* Floating geometric shapes */}
+        <div className="absolute top-20 left-10 w-20 h-20 border border-primary/30 rounded-full animate-bounce" style={{ animationDelay: '1s', animationDuration: '4s' }}></div>
+        <div className="absolute top-40 right-20 w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-40 left-20 w-24 h-24 border-2 border-accent/40 rotate-45 animate-spin" style={{ animationDuration: '20s' }}></div>
+        <div className="absolute bottom-20 right-40 w-12 h-12 bg-gradient-to-r from-accent/30 to-primary/30 rounded-full animate-bounce" style={{ animationDelay: '0.5s', animationDuration: '3s' }}></div>
+        <div className="absolute top-1/3 right-1/3 w-6 h-6 bg-primary/40 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+        <div className="absolute bottom-1/3 left-1/3 w-8 h-8 border border-accent/50 rounded-full animate-bounce" style={{ animationDelay: '2.5s', animationDuration: '5s' }}></div>
       </div>
 
-      {/* Navigation */}
-      <nav className="relative z-10 py-6 px-4 border-b border-border/50 backdrop-blur-sm bg-background/80">
-        <div className="container mx-auto flex justify-between items-center">
+      {/* Floating Navigation */}
+      <nav className="fixed top-6 left-6 right-6 z-50 backdrop-blur-sm bg-background/80 rounded-full border border-primary/20 px-6 py-3 animate-fade-in">
+        <div className="flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <GraduationCap className="h-8 w-8 text-primary animate-pulse" />
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <GraduationCap className="h-6 w-6 text-primary animate-pulse" />
+            <span className="text-lg font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Alumni Alliance
             </span>
           </div>
-          <Button asChild variant="outline" size="sm">
-            <Link to="/auth">Sign In</Link>
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => navigate("/auth")}
+            className="hover:scale-105 transition-all duration-300 border-primary/30 hover:bg-primary/10 rounded-full"
+          >
+            Sign In
           </Button>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative z-10 py-32 px-4">
-        <div className="container mx-auto text-center">
-          <div className="flex justify-center mb-8 animate-fade-in">
-            <div className="relative">
-              <GraduationCap className="h-20 w-20 text-primary animate-pulse" />
-              <Sparkles className="absolute -top-2 -right-2 h-6 w-6 text-accent animate-pulse delay-300" />
-            </div>
+      {/* Main Hero Content */}
+      <div className="relative z-10 min-h-screen flex items-center justify-center px-6 pt-20">
+        <div className="text-center space-y-12 max-w-6xl mx-auto">
+          {/* Hero Title */}
+          <div className="space-y-6 animate-fade-in">
+            <h1 className="text-7xl md:text-9xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              Connect
+            </h1>
+            <h2 className="text-5xl md:text-7xl font-light text-muted-foreground">
+              Grow Together
+            </h2>
           </div>
-          <h1 className="text-6xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-fade-in delay-300 bg-size-200 animate-pulse">
-            Alumni Alliance
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in delay-500">
-            Connect with your alma mater, build lasting relationships, and unlock new opportunities 
-            through our comprehensive alumni network platform.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in delay-700">
-            <Button asChild size="lg" className="group hover-scale transition-all duration-300 shadow-lg hover:shadow-xl">
-              <Link to="/auth" className="flex items-center">
-                Join Our Network
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+          
+          {/* Rotating Quote Card */}
+          <div className="animate-fade-in" style={{ animationDelay: '0.5s' }}>
+            <Card className="max-w-4xl mx-auto bg-gradient-to-r from-primary/5 to-accent/5 border-primary/20 backdrop-blur-sm hover:scale-105 transition-all duration-500">
+              <CardContent className="p-8">
+                <Quote className="h-10 w-10 text-primary mb-6 mx-auto animate-pulse" />
+                <blockquote className="text-2xl md:text-3xl font-light text-center mb-8 transition-all duration-500">
+                  "{quotes[currentQuote].text}"
+                </blockquote>
+                <div className="text-center space-y-2">
+                  <p className="font-semibold text-primary text-lg">{quotes[currentQuote].author}</p>
+                  <p className="text-muted-foreground">{quotes[currentQuote].class}</p>
+                  <p className="text-sm text-muted-foreground">{quotes[currentQuote].position}</p>
+                </div>
+                
+                {/* Quote indicators */}
+                <div className="flex justify-center space-x-3 mt-6">
+                  {quotes.map((_, index) => (
+                    <div
+                      key={index}
+                      className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer hover:scale-125 ${
+                        index === currentQuote ? 'bg-primary' : 'bg-primary/30'
+                      }`}
+                      onClick={() => setCurrentQuote(index)}
+                    />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in" style={{ animationDelay: '1s' }}>
+            <Button 
+              size="lg" 
+              onClick={() => navigate("/auth")}
+              className="hover:scale-105 transition-all duration-300 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg hover:shadow-xl group px-8 py-4 text-lg"
+            >
+              Join the Network
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button variant="outline" size="lg" className="hover-scale transition-all duration-300">
-              Learn More
-            </Button>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Features Section */}
-      <section className="relative z-10 py-24 px-4 bg-muted/30 backdrop-blur-sm">
-        <div className="container mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent animate-fade-in">
-            Why Join Alumni Alliance?
-          </h2>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="text-center group hover-scale transition-all duration-500 hover:shadow-2xl border-border/50 backdrop-blur-sm bg-card/90 animate-fade-in delay-100">
-              <CardHeader>
-                <Network className="h-12 w-12 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
-                <CardTitle className="group-hover:text-primary transition-colors">Professional Network</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Connect with fellow alumni across industries and build meaningful professional relationships.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center group hover-scale transition-all duration-500 hover:shadow-2xl border-border/50 backdrop-blur-sm bg-card/90 animate-fade-in delay-200">
-              <CardHeader>
-                <Calendar className="h-12 w-12 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
-                <CardTitle className="group-hover:text-primary transition-colors">Exclusive Events</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Access alumni-only events, reunions, and networking sessions both online and offline.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center group hover-scale transition-all duration-500 hover:shadow-2xl border-border/50 backdrop-blur-sm bg-card/90 animate-fade-in delay-300">
-              <CardHeader>
-                <Briefcase className="h-12 w-12 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
-                <CardTitle className="group-hover:text-primary transition-colors">Career Opportunities</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Discover job openings, mentorship opportunities, and career advancement resources.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center group hover-scale transition-all duration-500 hover:shadow-2xl border-border/50 backdrop-blur-sm bg-card/90 animate-fade-in delay-400">
-              <CardHeader>
-                <Shield className="h-12 w-12 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
-                <CardTitle className="group-hover:text-primary transition-colors">Verified Profiles</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  All members are verified alumni, ensuring authentic connections and trusted networking.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center group hover-scale transition-all duration-500 hover:shadow-2xl border-border/50 backdrop-blur-sm bg-card/90 animate-fade-in delay-500">
-              <CardHeader>
-                <Users className="h-12 w-12 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
-                <CardTitle className="group-hover:text-primary transition-colors">Mentorship Program</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Connect with experienced alumni mentors or become a mentor to recent graduates.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center group hover-scale transition-all duration-500 hover:shadow-2xl border-border/50 backdrop-blur-sm bg-card/90 animate-fade-in delay-600">
-              <CardHeader>
-                <Trophy className="h-12 w-12 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
-                <CardTitle className="group-hover:text-primary transition-colors">Alumni Success</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Celebrate achievements, share success stories, and inspire the next generation.
-                </CardDescription>
-              </CardContent>
-            </Card>
-          </div>
+      {/* Floating Navigation Elements */}
+      <div className="fixed bottom-6 left-6 right-6 z-40">
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-4 max-w-6xl mx-auto">
+          {floatingElements.map((element, index) => {
+            const Icon = element.icon;
+            return (
+              <Card 
+                key={element.title}
+                className={`group cursor-pointer hover:scale-110 transition-all duration-500 hover:shadow-2xl bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-sm border-primary/20 animate-fade-in hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10`}
+                style={{ animationDelay: `${index * 100}ms` }}
+                onClick={() => navigate(element.path)}
+              >
+                <CardContent className="p-4 text-center">
+                  <div className="mx-auto mb-2 p-3 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 group-hover:from-primary/30 group-hover:to-accent/30 transition-all duration-300 w-fit">
+                    <Icon className="h-6 w-6 text-primary group-hover:scale-110 transition-transform duration-300" />
+                  </div>
+                  <p className="text-xs font-medium group-hover:text-primary transition-colors duration-300">
+                    {element.title}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {element.description}
+                  </p>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
-      </section>
+      </div>
 
-      {/* Stats Section */}
-      <section className="relative z-10 py-20 px-4">
-        <div className="container mx-auto">
-          <div className="grid gap-8 md:grid-cols-4 text-center">
-            <div className="animate-fade-in delay-100 group">
-              <div className="text-5xl md:text-6xl font-bold text-primary mb-3 group-hover:scale-110 transition-transform duration-300">500+</div>
-              <p className="text-muted-foreground text-lg">Active Alumni</p>
+      {/* Floating Stats */}
+      <div className="fixed top-1/2 left-6 transform -translate-y-1/2 z-30 hidden lg:block animate-fade-in" style={{ animationDelay: '1.5s' }}>
+        <Card className="bg-background/80 backdrop-blur-sm border-primary/20">
+          <CardContent className="p-4 space-y-4">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-primary">10,000+</div>
+              <div className="text-xs text-muted-foreground">Alumni</div>
             </div>
-            <div className="animate-fade-in delay-200 group">
-              <div className="text-5xl md:text-6xl font-bold text-primary mb-3 group-hover:scale-110 transition-transform duration-300">50+</div>
-              <p className="text-muted-foreground text-lg">Companies</p>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-primary">500+</div>
+              <div className="text-xs text-muted-foreground">Companies</div>
             </div>
-            <div className="animate-fade-in delay-300 group">
-              <div className="text-5xl md:text-6xl font-bold text-primary mb-3 group-hover:scale-110 transition-transform duration-300">25+</div>
-              <p className="text-muted-foreground text-lg">Events This Year</p>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-primary">150+</div>
+              <div className="text-xs text-muted-foreground">Countries</div>
             </div>
-            <div className="animate-fade-in delay-400 group">
-              <div className="text-5xl md:text-6xl font-bold text-primary mb-3 group-hover:scale-110 transition-transform duration-300">95%</div>
-              <p className="text-muted-foreground text-lg">Satisfaction Rate</p>
-            </div>
-          </div>
-        </div>
-      </section>
+          </CardContent>
+        </Card>
+      </div>
 
-      {/* CTA Section */}
-      <section className="relative z-10 py-24 px-4 bg-gradient-to-r from-primary/90 to-accent/90 text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-        }}></div>
-        <div className="container mx-auto text-center relative">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">Ready to Reconnect?</h2>
-          <p className="text-xl md:text-2xl mb-12 opacity-90 max-w-2xl mx-auto animate-fade-in delay-200">
-            Join thousands of alumni who are already building their future together.
-          </p>
-          <Button asChild size="lg" variant="secondary" className="group hover-scale transition-all duration-300 shadow-xl hover:shadow-2xl animate-fade-in delay-400">
-            <Link to="/auth" className="flex items-center">
-              Get Started Today
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </Button>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-8 px-4 border-t">
-        <div className="container mx-auto text-center text-muted-foreground">
-          <p>&copy; 2024 Alumni Alliance. All rights reserved.</p>
-        </div>
-      </footer>
+      {/* Floating Achievement Badge */}
+      <div className="fixed top-1/2 right-6 transform -translate-y-1/2 z-30 hidden lg:block animate-fade-in" style={{ animationDelay: '2s' }}>
+        <Card className="bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-sm border-primary/30 hover:scale-105 transition-transform duration-300">
+          <CardContent className="p-6 text-center">
+            <Trophy className="h-8 w-8 text-primary mx-auto mb-2 animate-pulse" />
+            <div className="text-sm font-semibold text-primary">Excellence</div>
+            <div className="text-xs text-muted-foreground">Alumni Network</div>
+            <div className="text-xs text-accent mt-2">Est. 1999</div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };
