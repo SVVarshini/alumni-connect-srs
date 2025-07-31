@@ -3,10 +3,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Calendar, MapPin, Clock, Users, Video, Camera } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users, Video, Camera, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Events = () => {
   const [selectedMonth, setSelectedMonth] = useState('all');
+  const navigate = useNavigate();
 
   // Mock data
   const upcomingEvents = [
@@ -100,9 +102,19 @@ const Events = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-foreground">Events & Reunions</h1>
-        <p className="text-muted-foreground">Stay connected through alumni gatherings, workshops, and networking events</p>
+      <div className="flex items-center space-x-4">
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={() => navigate('/')}
+          className="hover:bg-primary/10 rounded-full p-2"
+        >
+          <ArrowLeft className="h-4 w-4" />
+        </Button>
+        <div>
+          <h1 className="text-3xl font-bold text-foreground">Events & Reunions</h1>
+          <p className="text-muted-foreground">Stay connected through alumni gatherings, workshops, and networking events</p>
+        </div>
       </div>
 
       <Tabs defaultValue="upcoming" className="space-y-4">

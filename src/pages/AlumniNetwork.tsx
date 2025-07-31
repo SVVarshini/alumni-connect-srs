@@ -5,10 +5,12 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Search, MapPin, Building2, Calendar, Users } from 'lucide-react';
+import { Search, MapPin, Building2, Calendar, Users, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const AlumniNetwork = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   // Mock data - replace with real data from your backend
   const alumni = [
@@ -59,9 +61,19 @@ const AlumniNetwork = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-foreground">Alumni Network</h1>
-        <p className="text-muted-foreground">Connect with fellow alumni and expand your professional network</p>
+      <div className="flex items-center space-x-4">
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={() => navigate('/')}
+          className="hover:bg-primary/10 rounded-full p-2"
+        >
+          <ArrowLeft className="h-4 w-4" />
+        </Button>
+        <div>
+          <h1 className="text-3xl font-bold text-foreground">Alumni Network</h1>
+          <p className="text-muted-foreground">Connect with fellow alumni and expand your professional network</p>
+        </div>
       </div>
 
       {/* Search */}

@@ -166,7 +166,7 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Floating Navigation Elements */}
+      {/* Floating Navigation Elements with Scrolling Animation */}
       <div className="fixed bottom-6 left-6 right-6 z-40">
         <div className="grid grid-cols-3 md:grid-cols-6 gap-4 max-w-6xl mx-auto">
           {floatingElements.map((element, index) => {
@@ -174,8 +174,11 @@ const Index = () => {
             return (
               <Card 
                 key={element.title}
-                className={`group cursor-pointer hover:scale-110 transition-all duration-500 hover:shadow-2xl bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-sm border-primary/20 animate-fade-in hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10`}
-                style={{ animationDelay: `${index * 100}ms` }}
+                className={`group cursor-pointer hover:scale-110 transition-all duration-500 hover:shadow-2xl bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-sm border-primary/20 animate-fade-in hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10 floating-element`}
+                style={{ 
+                  animationDelay: `${index * 100}ms`,
+                  animation: `fade-in 0.8s ease-out ${index * 100}ms both, float-scroll 15s linear infinite ${index * 2.5}s`
+                }}
                 onClick={() => navigate(element.path)}
               >
                 <CardContent className="p-4 text-center">

@@ -4,10 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Search, MapPin, Building2, Clock, DollarSign, Users, Upload, Star } from 'lucide-react';
+import { Search, MapPin, Building2, Clock, DollarSign, Users, Upload, Star, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const CareerPortal = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   // Mock data
   const jobs = [
@@ -81,9 +83,19 @@ const CareerPortal = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-foreground">Career Portal</h1>
-        <p className="text-muted-foreground">Discover opportunities and advance your career with alumni support</p>
+      <div className="flex items-center space-x-4">
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={() => navigate('/')}
+          className="hover:bg-primary/10 rounded-full p-2"
+        >
+          <ArrowLeft className="h-4 w-4" />
+        </Button>
+        <div>
+          <h1 className="text-3xl font-bold text-foreground">Career Portal</h1>
+          <p className="text-muted-foreground">Discover opportunities and advance your career with alumni support</p>
+        </div>
       </div>
 
       {/* Search */}
