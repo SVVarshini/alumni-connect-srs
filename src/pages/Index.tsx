@@ -167,7 +167,7 @@ const Index = () => {
       </div>
 
       {/* Navigation Elements integrated with background */}
-      <div className="absolute bottom-12 left-6 right-6 z-20">
+      <div className="absolute bottom-6 left-6 right-6 z-20">
         <div className="grid grid-cols-3 md:grid-cols-6 gap-4 max-w-6xl mx-auto">
           {floatingElements.map((element, index) => {
             const Icon = element.icon;
