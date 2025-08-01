@@ -152,6 +152,35 @@ const Index = () => {
             </Card>
           </div>
 
+          {/* Navigation Elements between quotes and CTA */}
+          <div className="animate-fade-in" style={{ animationDelay: '0.8s' }}>
+            <div className="grid grid-cols-3 md:grid-cols-6 gap-4 max-w-4xl mx-auto mb-8">
+              {floatingElements.map((element, index) => {
+                const Icon = element.icon;
+                return (
+                  <div 
+                    key={element.title}
+                    className={`group cursor-pointer hover:scale-105 transition-all duration-300 animate-fade-in p-4 text-center rounded-lg bg-background/10 hover:bg-primary/10 backdrop-blur-sm border border-primary/10 hover:border-primary/20`}
+                    style={{ 
+                      animationDelay: `${(index * 100) + 800}ms`
+                    }}
+                    onClick={() => navigate(element.path)}
+                  >
+                    <div className="mx-auto mb-2 p-3 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 group-hover:from-primary/20 group-hover:to-accent/20 transition-all duration-300 w-fit backdrop-blur-sm">
+                      <Icon className="h-6 w-6 text-primary/70 group-hover:text-primary group-hover:scale-110 transition-all duration-300" />
+                    </div>
+                    <p className="text-xs font-medium text-primary/70 group-hover:text-primary transition-colors duration-300">
+                      {element.title}
+                    </p>
+                    <p className="text-xs text-muted-foreground/60 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {element.description}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in" style={{ animationDelay: '1s' }}>
             <Button 
@@ -166,34 +195,6 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Navigation Elements integrated with background */}
-      <div className="absolute bottom-6 left-6 right-6 z-20">
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-4 max-w-6xl mx-auto">
-          {floatingElements.map((element, index) => {
-            const Icon = element.icon;
-            return (
-              <div 
-                key={element.title}
-                className={`group cursor-pointer hover:scale-105 transition-all duration-300 animate-fade-in p-4 text-center rounded-lg bg-background/10 hover:bg-primary/10 backdrop-blur-sm border border-primary/10 hover:border-primary/20`}
-                style={{ 
-                  animationDelay: `${index * 100}ms`
-                }}
-                onClick={() => navigate(element.path)}
-              >
-                <div className="mx-auto mb-2 p-3 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 group-hover:from-primary/20 group-hover:to-accent/20 transition-all duration-300 w-fit backdrop-blur-sm">
-                  <Icon className="h-6 w-6 text-primary/70 group-hover:text-primary group-hover:scale-110 transition-all duration-300" />
-                </div>
-                <p className="text-xs font-medium text-primary/70 group-hover:text-primary transition-colors duration-300">
-                  {element.title}
-                </p>
-                <p className="text-xs text-muted-foreground/60 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {element.description}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
 
       {/* Floating Stats */}
       <div className="fixed top-1/2 left-6 transform -translate-y-1/2 z-30 hidden lg:block animate-fade-in" style={{ animationDelay: '1.5s' }}>
