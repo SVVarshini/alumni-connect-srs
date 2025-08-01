@@ -166,18 +166,17 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Floating Navigation Elements with Scrolling Animation */}
-      <div className="fixed bottom-6 left-6 right-6 z-40 overflow-hidden">
+      {/* Navigation Elements integrated with background */}
+      <div className="absolute bottom-12 left-6 right-6 z-20">
         <div className="grid grid-cols-3 md:grid-cols-6 gap-4 max-w-6xl mx-auto">
           {floatingElements.map((element, index) => {
             const Icon = element.icon;
             return (
               <div 
                 key={element.title}
-                className={`group cursor-pointer hover:scale-110 transition-all duration-500 animate-fade-in p-4 text-center rounded-lg hover:bg-primary/5 backdrop-blur-sm border border-primary/10 hover:border-primary/20`}
+                className={`group cursor-pointer hover:scale-105 transition-all duration-300 animate-fade-in p-4 text-center rounded-lg bg-background/10 hover:bg-primary/10 backdrop-blur-sm border border-primary/10 hover:border-primary/20`}
                 style={{ 
-                  animationDelay: `${index * 100}ms`,
-                  animation: `fade-in 0.8s ease-out ${index * 100}ms both, float-scroll 20s linear infinite ${index * 3}s`
+                  animationDelay: `${index * 100}ms`
                 }}
                 onClick={() => navigate(element.path)}
               >
