@@ -158,24 +158,26 @@ const Index = () => {
               {floatingElements.map((element, index) => {
                 const Icon = element.icon;
                 return (
-                  <div 
+                  <Card 
                     key={element.title}
-                    className={`group cursor-pointer hover:scale-105 transition-all duration-300 animate-fade-in p-4 text-center rounded-lg bg-background/10 hover:bg-primary/10 backdrop-blur-sm border border-primary/10 hover:border-primary/20`}
+                    className={`group cursor-pointer hover:scale-105 transition-all duration-300 animate-fade-in bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-sm border-primary/20 hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10 hover:shadow-lg`}
                     style={{ 
                       animationDelay: `${(index * 100) + 800}ms`
                     }}
                     onClick={() => navigate(element.path)}
                   >
-                    <div className="mx-auto mb-2 p-3 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 group-hover:from-primary/20 group-hover:to-accent/20 transition-all duration-300 w-fit backdrop-blur-sm">
-                      <Icon className="h-6 w-6 text-primary/70 group-hover:text-primary group-hover:scale-110 transition-all duration-300" />
-                    </div>
-                    <p className="text-xs font-medium text-primary/70 group-hover:text-primary transition-colors duration-300">
-                      {element.title}
-                    </p>
-                    <p className="text-xs text-muted-foreground/60 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {element.description}
-                    </p>
-                  </div>
+                    <CardContent className="p-4 text-center">
+                      <div className="mx-auto mb-2 p-3 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 group-hover:from-primary/30 group-hover:to-accent/30 transition-all duration-300 w-fit">
+                        <Icon className="h-6 w-6 text-primary group-hover:scale-110 transition-all duration-300" />
+                      </div>
+                      <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors duration-300">
+                        {element.title}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        {element.description}
+                      </p>
+                    </CardContent>
+                  </Card>
                 );
               })}
             </div>
