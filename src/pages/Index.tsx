@@ -98,14 +98,25 @@ const Index = () => {
               Alumni Alliance
             </span>
           </div>
-          <Button 
-            variant="outline" 
-            size="sm"
-            onClick={() => navigate("/auth")}
-            className="hover:scale-105 transition-all duration-300 border-primary/30 hover:bg-primary/10 rounded-full"
-          >
-            Sign In
-          </Button>
+          {user ? (
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => navigate("/dashboard")}
+              className="hover:scale-105 transition-all duration-300 border-primary/30 hover:bg-primary/10 rounded-full"
+            >
+              Dashboard
+            </Button>
+          ) : (
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => navigate("/auth")}
+              className="hover:scale-105 transition-all duration-300 border-primary/30 hover:bg-primary/10 rounded-full"
+            >
+              Sign In
+            </Button>
+          )}
         </div>
       </nav>
 
@@ -184,16 +195,18 @@ const Index = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in" style={{ animationDelay: '1s' }}>
-            <Button 
-              size="lg" 
-              onClick={() => navigate("/auth")}
-              className="hover:scale-105 transition-all duration-300 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg hover:shadow-xl group px-8 py-4 text-lg"
-            >
-              Join the Network
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </div>
+          {!user && (
+            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in" style={{ animationDelay: '1s' }}>
+              <Button 
+                size="lg" 
+                onClick={() => navigate("/auth")}
+                className="hover:scale-105 transition-all duration-300 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg hover:shadow-xl group px-8 py-4 text-lg"
+              >
+                Join the Network
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 
