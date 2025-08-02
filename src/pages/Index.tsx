@@ -2,7 +2,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
-import { GraduationCap, Users, Calendar, Briefcase, ArrowRight, BookOpen, Heart, Quote, Star, Sparkles, Network, Shield, Trophy } from 'lucide-react';
+import { GraduationCap, Users, Calendar, Briefcase, ArrowRight, BookOpen, Heart, Quote, Star, Sparkles, Network, Shield, Trophy, Newspaper, Clock } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -194,9 +194,59 @@ const Index = () => {
             </div>
           </div>
 
+          {/* News and Updates Section */}
+          <div className="animate-fade-in max-w-4xl mx-auto" style={{ animationDelay: '1.2s' }}>
+            <Card className="bg-gradient-to-r from-card/80 to-card/60 backdrop-blur-sm border-primary/20">
+              <CardHeader className="text-center pb-4">
+                <div className="mx-auto mb-3 p-3 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 w-fit">
+                  <Newspaper className="h-6 w-6 text-primary" />
+                </div>
+                <CardTitle className="text-xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Latest News & Updates
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="p-4 rounded-lg bg-primary/5 border border-primary/10">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <Clock className="h-4 w-4 text-primary" />
+                      <span className="text-sm text-muted-foreground">2 days ago</span>
+                    </div>
+                    <h4 className="font-semibold text-foreground mb-1">Alumni Global Conference 2024</h4>
+                    <p className="text-sm text-muted-foreground">Join us for our biggest annual gathering featuring keynotes from industry leaders and networking opportunities.</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-accent/5 border border-accent/10">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <Clock className="h-4 w-4 text-accent" />
+                      <span className="text-sm text-muted-foreground">1 week ago</span>
+                    </div>
+                    <h4 className="font-semibold text-foreground mb-1">New Mentorship Program</h4>
+                    <p className="text-sm text-muted-foreground">Connect with experienced alumni mentors to accelerate your career growth and professional development.</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-primary/5 border border-primary/10">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <Clock className="h-4 w-4 text-primary" />
+                      <span className="text-sm text-muted-foreground">2 weeks ago</span>
+                    </div>
+                    <h4 className="font-semibold text-foreground mb-1">Scholarship Fund Launch</h4>
+                    <p className="text-sm text-muted-foreground">We've launched a new scholarship fund to support current students pursuing excellence in their academic journey.</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-accent/5 border border-accent/10">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <Clock className="h-4 w-4 text-accent" />
+                      <span className="text-sm text-muted-foreground">3 weeks ago</span>
+                    </div>
+                    <h4 className="font-semibold text-foreground mb-1">Mobile App Update</h4>
+                    <p className="text-sm text-muted-foreground">Our new mobile app features enhanced networking tools and event management capabilities for better connectivity.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
           {/* CTA Buttons */}
           {!user && (
-            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in" style={{ animationDelay: '1s' }}>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in" style={{ animationDelay: '1.4s' }}>
               <Button 
                 size="lg" 
                 onClick={() => navigate("/auth")}
