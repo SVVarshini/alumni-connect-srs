@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Calendar, MapPin, Clock, Users, Video, Camera, ArrowLeft } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users, Video, Camera, ArrowLeft, Newspaper } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Events = () => {
@@ -121,6 +121,7 @@ const Events = () => {
         <TabsList>
           <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
           <TabsTrigger value="past">Past Events</TabsTrigger>
+          <TabsTrigger value="news">News & Updates</TabsTrigger>
           <TabsTrigger value="calendar">Calendar View</TabsTrigger>
         </TabsList>
 
@@ -261,6 +262,121 @@ const Events = () => {
               </Card>
             ))}
           </div>
+        </TabsContent>
+
+        <TabsContent value="news" className="space-y-6">
+          <div className="flex items-center space-x-4 mb-6">
+            <div className="p-3 rounded-full bg-gradient-to-br from-primary/20 to-accent/20">
+              <Newspaper className="h-6 w-6 text-primary" />
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold">Latest News & Updates</h3>
+              <p className="text-muted-foreground">Stay informed about the latest alumni news, achievements, and community updates</p>
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex items-center space-x-2 mb-2">
+                  <Clock className="h-4 w-4 text-primary" />
+                  <span className="text-sm text-muted-foreground">2 days ago</span>
+                </div>
+                <CardTitle className="text-lg">Alumni Global Conference 2024</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="mb-4">
+                  Join us for our biggest annual gathering featuring keynotes from industry leaders and networking opportunities across multiple continents.
+                </CardDescription>
+                <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-4">
+                  <Badge variant="outline" className="text-primary border-primary/30">Featured Event</Badge>
+                  <span>Global Conference</span>
+                </div>
+                <Button variant="outline" size="sm">Read More</Button>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex items-center space-x-2 mb-2">
+                  <Clock className="h-4 w-4 text-accent" />
+                  <span className="text-sm text-muted-foreground">1 week ago</span>
+                </div>
+                <CardTitle className="text-lg">New Mentorship Program Launch</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="mb-4">
+                  Connect with experienced alumni mentors to accelerate your career growth and professional development through our new structured program.
+                </CardDescription>
+                <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-4">
+                  <Badge variant="outline" className="text-accent border-accent/30">Program Launch</Badge>
+                  <span>Career Development</span>
+                </div>
+                <Button variant="outline" size="sm">Learn More</Button>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex items-center space-x-2 mb-2">
+                  <Clock className="h-4 w-4 text-primary" />
+                  <span className="text-sm text-muted-foreground">2 weeks ago</span>
+                </div>
+                <CardTitle className="text-lg">Alumni Scholarship Fund Milestone</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="mb-4">
+                  We've reached $2M in our scholarship fund, supporting 150+ students this year. Thank you to all alumni who contributed to this achievement.
+                </CardDescription>
+                <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-4">
+                  <Badge variant="outline" className="text-green-600 border-green-200">Milestone</Badge>
+                  <span>Community Impact</span>
+                </div>
+                <Button variant="outline" size="sm">View Impact</Button>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex items-center space-x-2 mb-2">
+                  <Clock className="h-4 w-4 text-accent" />
+                  <span className="text-sm text-muted-foreground">3 weeks ago</span>
+                </div>
+                <CardTitle className="text-lg">Mobile App 2.0 Released</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="mb-4">
+                  Enhanced networking tools, improved event management, and new messaging features make connecting with fellow alumni easier than ever.
+                </CardDescription>
+                <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-4">
+                  <Badge variant="outline" className="text-blue-600 border-blue-200">Tech Update</Badge>
+                  <span>Platform Enhancement</span>
+                </div>
+                <Button variant="outline" size="sm">Download Now</Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          <Card className="bg-gradient-to-r from-primary/5 to-accent/5 border-primary/20">
+            <CardHeader>
+              <CardTitle>Alumni Spotlight</CardTitle>
+              <CardDescription>Celebrating outstanding achievements in our community</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="p-4 rounded-lg bg-background/80">
+                  <h4 className="font-semibold text-foreground mb-2">Dr. Sarah Johnson (Class of 2010)</h4>
+                  <p className="text-sm text-muted-foreground mb-2">Recently appointed as Chief Technology Officer at Microsoft, leading AI innovation initiatives.</p>
+                  <Badge variant="outline" className="text-primary border-primary/30">Tech Leadership</Badge>
+                </div>
+                <div className="p-4 rounded-lg bg-background/80">
+                  <h4 className="font-semibold text-foreground mb-2">Marcus Chen (Class of 2015)</h4>
+                  <p className="text-sm text-muted-foreground mb-2">Founded GreenTech Solutions, which just raised $50M Series B to expand renewable energy projects globally.</p>
+                  <Badge variant="outline" className="text-green-600 border-green-200">Entrepreneurship</Badge>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
 
         <TabsContent value="calendar" className="space-y-4">
