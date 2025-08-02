@@ -13,6 +13,11 @@ import AppLayout from "./components/layout/AppLayout";
 import AlumniNetwork from "./pages/AlumniNetwork";
 import CareerPortal from "./pages/CareerPortal";
 import Events from "./pages/Events";
+import News from "./pages/News";
+import KnowledgeHub from "./pages/KnowledgeHub";
+import GiveBack from "./pages/GiveBack";
+import Community from "./pages/Community";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +59,11 @@ const App = () => (
               <Route path="alumni-network" element={<AlumniNetwork />} />
               <Route path="career-portal" element={<CareerPortal />} />
               <Route path="events" element={<Events />} />
+              <Route path="news" element={<News />} />
+              <Route path="knowledge-hub" element={<KnowledgeHub />} />
+              <Route path="give-back" element={<GiveBack />} />
+              <Route path="community" element={<Community />} />
+              <Route path="contact" element={<Contact />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
